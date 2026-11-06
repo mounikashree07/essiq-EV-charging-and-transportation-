@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: essiq
+    runtime: docker
+    plan: starter
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    disk:
+      name: essiq-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: AUTH_DATABASE_PATH
+        value: /var/data/essiq_auth.sqlite3
+      - key: COOKIE_SECURE
+        value: "true"
+      - key: OPEN_CHARGE_MAP_API_KEY
+        sync: false
